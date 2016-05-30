@@ -22,9 +22,11 @@ if (getenv('APP_ENV') == false) {
 /***
  * Mailer
  */
-function wp_mail($to, $subject, $message, $headers = '', $attachments = [])
-{
-    return Suzie\Mailer::boot($to, $subject, $message, $headers, $attachments);
+if (getenv('MAILGUN_ENABLED') == 'true') {
+    function wp_mail($to, $subject, $message, $headers = '', $attachments = [])
+    {
+        return Suzie\Mailer::boot($to, $subject, $message, $headers, $attachments);
+    }
 }
 
 function suzie()
